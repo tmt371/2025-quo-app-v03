@@ -18,6 +18,7 @@ export class StateManager {
       isEditing: false,
       activeCell: { rowIndex: 0, column: "width" },
       selectedRowIndex: null,
+      currentView: "QUICK_QUOTE",
     }
 
     console.log("StateManager (Orchestrator) Initialized.")

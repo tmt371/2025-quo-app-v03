@@ -25,11 +25,13 @@ export class UIManager {
   }
 
   render(state) {
-    // --- [修改] 移除偵錯日誌 ---
-    // console.log("%cUIManager RECEIVED state for rendering:", "color: green; font-weight: bold;", state);
+    console.log("[v0] UIManager render called, state:", state)
+    console.log("[v0] Current view:", state.ui.currentView)
 
     if (state.ui.currentView === "QUICK_QUOTE") {
       this._renderQuickQuoteView(state)
+    } else {
+      console.log("[v0] View condition not met, not rendering")
     }
   }
 
