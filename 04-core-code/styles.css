@@ -1,0 +1,86 @@
+/* 添加鍵盤面板的 CSS 動畫和層級控制 */
+
+/* 數字鍵盤面板控制 */
+#numeric-keyboard-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #ddd;
+  transition: transform 0.3s ease;
+  z-index: 100; /* 中層 */
+}
+
+#numeric-keyboard-panel.is-collapsed {
+  transform: translateY(calc(100% - 40px)); /* 只露出箭頭按鈕 */
+}
+
+/* 功能鍵盤面板控制 */
+#function-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  background: white;
+  border-left: 1px solid #ddd;
+  transition: transform 0.3s ease;
+  transform: translateX(100%); /* 默認隱藏在右側 */
+  z-index: 200; /* 頂層 */
+}
+
+#function-panel.is-expanded {
+  transform: translateX(0); /* 顯示時移動到可見位置 */
+}
+
+/* 確保功能鍵盤不會擋到數字鍵盤的箭頭按鈕 */
+#function-panel.is-expanded {
+  bottom: 40px; /* 為數字鍵盤箭頭按鈕留出空間 */
+}
+
+/* 面板切換按鈕樣式 */
+#panel-toggle {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+}
+
+#function-panel-toggle {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 150;
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 16px 8px;
+  cursor: pointer;
+  border-radius: 4px 0 0 4px;
+}
+
+/* 箭頭圖標 */
+#panel-toggle::before {
+  content: "▲";
+}
+
+#numeric-keyboard-panel.is-collapsed #panel-toggle::before {
+  content: "▼";
+}
+
+#function-panel-toggle::before {
+  content: "◀";
+}
+
+#function-panel.is-expanded + #function-panel-toggle::before {
+  content: "▶";
+}

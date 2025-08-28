@@ -91,15 +91,21 @@ export class UIManager {
   }
 
   _toggleNumericKeyboard() {
+    console.log("[v0] Toggling numeric keyboard")
     if (this.numericKeyboardPanel) {
       this.numericKeyboardPanel.classList.toggle("is-collapsed")
+      console.log("[v0] Numeric keyboard panel classes:", this.numericKeyboardPanel.className)
     }
   }
+
   _toggleFunctionKeyboard() {
+    console.log("[v0] Toggling function keyboard")
     if (this.functionPanel) {
       this.functionPanel.classList.toggle("is-expanded")
+      console.log("[v0] Function panel classes:", this.functionPanel.className)
     }
   }
+
   _handleEmailRequest() {
     const state = this.stateManager.getState()
     const quoteData = state.quoteData
@@ -113,6 +119,7 @@ export class UIManager {
     const mailtoLink = `mailto:${CUSTOMER_EMAIL}?cc=${COMPANY_EMAIL}&subject=${subject}&body=${encodedBody}`
     window.location.href = mailtoLink
   }
+
   _formatQuoteForEmail(quoteData) {
     let content = "Hello,\n\nHere is your quotation from Ez Blinds:\n\n"
     content += "====================================\n"

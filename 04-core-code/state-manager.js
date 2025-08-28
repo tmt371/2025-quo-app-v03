@@ -216,7 +216,33 @@ export class StateManager {
       this.eventAggregator.publish("showNotification", { message: "Error: Could not load quote.", type: "error" })
     }
   }
-  _handleTableHeaderClick() {}
+  _handleTableHeaderClick({ column }) {
+    if (column === "TYPE") {
+      const items = this.quoteModel.getAllItems()
+      const TYPE_SEQUENCE = ["BO", "BO1", "SN"]
+
+      let currentTypeIndex = -1
+      for (const item of items) {
+        if (item.width || item.height) {
+          if (item.fabricType) {
+            currentTypeIndex = TYPE_SEQUENCE.indexOf(item.fabricType)
+            break
+          }
+        }
+      }
+
+      const nextIndex = (currentTypeIndex + 1) % TYPE_SEQUENCE.length
+      const nextType = TYPE_SEQUENCE[nextIndex]
+
+      items.forEach((item, index) => {
+        if (item.width || item.height) {
+          this.quoteModel.updateItemValue(index, "fabricType", nextType)
+        }
+      })
+
+      this._publishStateChange()
+    }
+  }
 
   getState() {
     return {
